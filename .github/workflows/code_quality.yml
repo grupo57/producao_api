@@ -1,8 +1,5 @@
 name: Code Quality and Analysis
 on:
-  push:
-    branches:
-      - master
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
