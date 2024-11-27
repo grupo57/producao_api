@@ -12,9 +12,9 @@
     </parent>
 
     <groupId>br.com.fiap.soat07</groupId>
-    <artifactId>cozinha</artifactId>
+    <artifactId>producao</artifactId>
     <version>4.0.0</version>
-    <name>tech-challenge-04-cozinha</name>
+    <name>tech-challenge-04-producao</name>
     <description>Tech Challenge Fase 4</description>
 
     <properties>

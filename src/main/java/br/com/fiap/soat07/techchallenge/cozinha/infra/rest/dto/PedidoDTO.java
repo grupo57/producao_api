@@ -1,4 +1,4 @@
-package br.com.fiap.soat07.techchallenge.cozinha.infra.rest.dto;
+package br.com.fiap.soat07.techchallenge.producao.infra.rest.dto;
 
 import java.util.Collections;
 import java.util.Set;
@@ -13,11 +13,12 @@ public class PedidoDTO {
     private Set<ProdutoDTO> produtos;
 
     public PedidoDTO() {
-	}
+    }
 
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -25,6 +26,7 @@ public class PedidoDTO {
     public String getCliente() {
         return cliente;
     }
+
     public void setCliente(String cliente) {
         this.cliente = cliente;
     }
@@ -32,6 +34,7 @@ public class PedidoDTO {
     public String getCodigo() {
         return codigo;
     }
+
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
@@ -41,6 +44,7 @@ public class PedidoDTO {
             return Collections.emptySet();
         return produtos;
     }
+
     public void setProdutos(Set<ProdutoDTO> produtos) {
         this.produtos = produtos;
     }

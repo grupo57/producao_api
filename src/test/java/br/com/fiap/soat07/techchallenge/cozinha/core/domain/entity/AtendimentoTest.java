@@ -1,4 +1,4 @@
-package br.com.fiap.soat07.techchallenge.cozinha.core.domain.entity;
+package br.com.fiap.soat07.techchallenge.producao.core.domain.entity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,9 +10,9 @@ import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration.SituacaoDoAtendimento;
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration.TipoProdutoEnum;
-import br.com.fiap.soat07.techchallenge.cozinha.infra.rest.dto.ProdutoDTO;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.SituacaoDoAtendimento;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.TipoProdutoEnum;
+import br.com.fiap.soat07.techchallenge.producao.infra.rest.dto.ProdutoDTO;
 
 class AtendimentoTest {
 
@@ -21,7 +21,7 @@ class AtendimentoTest {
     private Long id = 1L;
     private Long idPedido = 123L;
     private String codigo = "ABC123";
-    
+
     LocalDateTime agora = LocalDateTime.now();
     private LocalDateTime recebido = agora.minusMinutes(5);
     private LocalDateTime iniciado = agora.minusMinutes(8);
@@ -29,12 +29,12 @@ class AtendimentoTest {
     private LocalDateTime concluido = agora;
     private Set<ProdutoDTO> produtos = new HashSet<>(List.of(
             new ProdutoDTO(1L, "nome1", "codigo1", TipoProdutoEnum.ACOMPANHAMENTO),
-            new ProdutoDTO(2L, "nome2", "codigo2", TipoProdutoEnum.LANCHE)
-            ));
+            new ProdutoDTO(2L, "nome2", "codigo2", TipoProdutoEnum.LANCHE)));
 
     @BeforeEach
     void setUp() {
-        atendimento = new Atendimento(id, idPedido, codigo, SituacaoDoAtendimento.ENTREGUE, recebido, iniciado, preparado, concluido, produtos);
+        atendimento = new Atendimento(id, idPedido, codigo, SituacaoDoAtendimento.ENTREGUE, recebido, iniciado,
+                preparado, concluido, produtos);
     }
 
     @Test
@@ -90,12 +90,12 @@ class AtendimentoTest {
 
     @Test
     void testGettersSetters() {
-    	
+
         atendimento = new Atendimento(id, idPedido, codigo, null, null, null, produtos);
         assertThat(atendimento.getSituacao()).isEqualTo(SituacaoDoAtendimento.RECEBIDO);
         assertThat(atendimento.getIniciado()).isNull();
         assertThat(atendimento.getPreparado()).isNull();
-        assertThat(atendimento.getConcluido()).isNull();    	
+        assertThat(atendimento.getConcluido()).isNull();
 
         // Testando o setter para 'iniciado'
         atendimento = new Atendimento(id, idPedido, codigo, null, null, null, produtos);
@@ -113,7 +113,7 @@ class AtendimentoTest {
         assertThat(atendimento.getIniciado()).isNotNull();
         assertThat(atendimento.getPreparado()).isNotNull();
         assertThat(atendimento.getConcluido()).isNull();
-        
+
         // Testando o setter para 'concluido'
         atendimento = new Atendimento(id, idPedido, codigo, null, null, null, produtos);
         atendimento.iniciado();
@@ -132,7 +132,7 @@ class AtendimentoTest {
         assertThat(atendimento.getIniciado()).isNotNull();
         assertThat(atendimento.getConcluido()).isNotNull();
     }
-    
+
     @Test
     void testSeEstaFinalizadoNaoPodeCancelar() {
         // Testando o setter para 'concluido'
@@ -145,20 +145,21 @@ class AtendimentoTest {
         assertThat(atendimento.getSituacao()).isEqualTo(SituacaoDoAtendimento.ENTREGUE);
         assertThat(atendimento.getConcluido()).isNotNull();
     }
-    
+
     @Test
     void testToString() {
-    	atendimento = new Atendimento(id, idPedido, codigo, null, null, null, produtos);
-        String expectedString = "Atendimento{id=" + id + ", pedido='" + idPedido + "', codigo='" + codigo + "', situacao='RECEBIDO'}";
+        atendimento = new Atendimento(id, idPedido, codigo, null, null, null, produtos);
+        String expectedString = "Atendimento{id=" + id + ", pedido='" + idPedido + "', codigo='" + codigo
+                + "', situacao='RECEBIDO'}";
 
         assertThat(atendimento.toString()).isEqualTo(expectedString);
     }
-    
+
     @Test
     void testEquals_MesmoObjeto() {
-    	
-    	// O mesmo objeto deve ser igual a si mesmo
-        assertThat(atendimento).isEqualTo(atendimento);  // Espera que os objetos sejam iguais
+
+        // O mesmo objeto deve ser igual a si mesmo
+        assertThat(atendimento).isEqualTo(atendimento); // Espera que os objetos sejam iguais
     }
 
     @Test
@@ -177,7 +178,7 @@ class AtendimentoTest {
         Atendimento atendimento1 = new Atendimento(id, idPedido, codigo, null, null, null, produtos);
 
         // Testa a comparação com um objeto nulo
-        assertThat(atendimento1).isNotEqualTo(null);  
+        assertThat(atendimento1).isNotEqualTo(null);
     }
 
     @Test
@@ -186,7 +187,7 @@ class AtendimentoTest {
 
         // Testa a comparação com um objeto de classe diferente
         String outroObjeto = "Um outro objeto qualquer";
-        assertThat(atendimento1).isNotEqualTo(outroObjeto);  
+        assertThat(atendimento1).isNotEqualTo(outroObjeto);
     }
 
     @Test
@@ -212,7 +213,7 @@ class AtendimentoTest {
         // Testa se o hashCode é consistente (não deve mudar entre chamadas)
         int hashCode1 = atendimento1.hashCode();
         int hashCode2 = atendimento1.hashCode();
-        assertThat(hashCode1).isEqualTo(hashCode2);  
+        assertThat(hashCode1).isEqualTo(hashCode2);
     }
-    
+
 }

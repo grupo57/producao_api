@@ -1,8 +1,8 @@
-package br.com.fiap.soat07.techchallenge.cozinha.infra.rest.dto;
+package br.com.fiap.soat07.techchallenge.producao.infra.rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration.TipoProdutoEnum;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.TipoProdutoEnum;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProdutoDTO {
@@ -11,7 +11,9 @@ public class ProdutoDTO {
     private String codigo;
     private TipoProdutoEnum tipoProduto;
 
-    protected ProdutoDTO() {}
+    protected ProdutoDTO() {
+    }
+
     public ProdutoDTO(Long id, String nome, String codigo, TipoProdutoEnum tipoProduto) {
         this.id = id;
         this.nome = nome;
@@ -22,6 +24,7 @@ public class ProdutoDTO {
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -29,6 +32,7 @@ public class ProdutoDTO {
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -36,6 +40,7 @@ public class ProdutoDTO {
     public String getCodigo() {
         return codigo;
     }
+
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
@@ -43,6 +48,7 @@ public class ProdutoDTO {
     public TipoProdutoEnum getTipo() {
         return tipoProduto;
     }
+
     public void setTipo(TipoProdutoEnum tipo) {
         this.tipoProduto = tipo;
     }

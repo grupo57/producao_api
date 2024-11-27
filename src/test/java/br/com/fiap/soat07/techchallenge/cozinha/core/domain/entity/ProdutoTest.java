@@ -1,24 +1,24 @@
-package br.com.fiap.soat07.techchallenge.cozinha.core.domain.entity;
+package br.com.fiap.soat07.techchallenge.producao.core.domain.entity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration.TipoProdutoEnum;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.TipoProdutoEnum;
 
 class ProdutoTest {
 
-	@Test
-	void testConstrutor_Padrao() {
+    @Test
+    void testConstrutor_Padrao() {
         // Criando um Produto com o construtor padrão
-		Produto produtoPadrao = new Produto();
+        Produto produtoPadrao = new Produto();
 
         // Verificando valores iniciais
         assertThat(produtoPadrao.getId()).isNull();
         assertThat(produtoPadrao.getNome()).isNull();
         assertThat(produtoPadrao.getCodigo()).isNull();
         assertThat(produtoPadrao.getTipoProduto()).isNull();
-	}
+    }
 
     @Test
     void testEquals_MesmoObjeto() {
@@ -33,7 +33,7 @@ class ProdutoTest {
         Produto produto1 = new Produto("001", "Produto A", TipoProdutoEnum.ACOMPANHAMENTO);
 
         // Testa a comparação com um objeto nulo
-        assertThat(produto1).isNotEqualTo(null); 
+        assertThat(produto1).isNotEqualTo(null);
     }
 
     @Test
@@ -81,5 +81,5 @@ class ProdutoTest {
         // Objetos equivalentes devem ter o mesmo hashCode
         assertThat(produto1.hashCode()).isEqualTo(produto2.hashCode());
     }
-	
+
 }

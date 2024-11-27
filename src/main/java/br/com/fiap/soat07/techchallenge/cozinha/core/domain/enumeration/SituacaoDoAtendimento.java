@@ -1,4 +1,4 @@
-package br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration;
+package br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration;
 
 import java.util.Collection;
 import java.util.EnumSet;
@@ -12,6 +12,7 @@ public enum SituacaoDoAtendimento {
 
     /**
      * Lista de situações associadas ao Atendimento quem não está concluído
+     * 
      * @return Collection
      */
     public static Collection<SituacaoDoAtendimento> emAberto() {
@@ -20,6 +21,7 @@ public enum SituacaoDoAtendimento {
 
     /**
      * O atendimento é considerado encerrado quando não há mais o que fazer.
+     * 
      * @return boolean
      */
     public boolean isEncerrado() {

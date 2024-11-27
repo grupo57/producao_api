@@ -1,4 +1,4 @@
-package br.com.fiap.soat07.techchallenge.cozinha.infra.repository.mysql.config;
+package br.com.fiap.soat07.techchallenge.producao.infra.repository.mysql.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

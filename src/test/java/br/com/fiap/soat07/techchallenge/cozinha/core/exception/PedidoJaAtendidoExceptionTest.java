@@ -1,4 +1,4 @@
-package br.com.fiap.soat07.techchallenge.cozinha.core.exception;
+package br.com.fiap.soat07.techchallenge.producao.core.exception;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

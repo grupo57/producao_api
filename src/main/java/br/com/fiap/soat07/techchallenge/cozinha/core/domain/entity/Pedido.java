@@ -1,13 +1,13 @@
-package br.com.fiap.soat07.techchallenge.cozinha.core.domain.entity;
+package br.com.fiap.soat07.techchallenge.producao.core.domain.entity;
 
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration.PedidoStatusEnum;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.PedidoStatusEnum;
 
 public class Pedido {
-	
+
 	private Long id;
 	private String nomeCliente;
 	private String codigo;
@@ -18,6 +18,7 @@ public class Pedido {
 		this.produtos = new HashSet<>();
 		this.status = PedidoStatusEnum.PREPARO;
 	}
+
 	public Pedido(Long id, String codigo, String nomeCliente, PedidoStatusEnum status) {
 		this.id = id;
 		this.codigo = codigo;
@@ -51,11 +52,12 @@ public class Pedido {
 	public String toString() {
 		return nomeCliente == null || nomeCliente.isEmpty() ? codigo : nomeCliente;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(codigo, nomeCliente);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

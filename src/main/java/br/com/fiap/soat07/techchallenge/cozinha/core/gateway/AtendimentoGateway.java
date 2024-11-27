@@ -1,8 +1,8 @@
-package br.com.fiap.soat07.techchallenge.cozinha.core.gateway;
+package br.com.fiap.soat07.techchallenge.producao.core.gateway;
 
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.entity.Atendimento;
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration.SituacaoDoAtendimento;
-import br.com.fiap.soat07.techchallenge.cozinha.infra.rest.dto.ProdutoDTO;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.entity.Atendimento;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.SituacaoDoAtendimento;
+import br.com.fiap.soat07.techchallenge.producao.infra.rest.dto.ProdutoDTO;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -11,14 +11,16 @@ import java.util.Set;
 
 public interface AtendimentoGateway {
 
-	/**
-	 * Listagem de Atendimento em aberto
+    /**
+     * Listagem de Atendimento em aberto
+     * 
      * @return {@link Atendimento}
-	 */
-	Collection<Atendimento> find();
+     */
+    Collection<Atendimento> find();
 
-	/**
+    /**
      * Get by id
+     * 
      * @param id {@link Long}
      * @return {@link Atendimento}
      */
@@ -26,6 +28,7 @@ public interface AtendimentoGateway {
 
     /**
      * Pesquisa paginada dos atendimentos por situação
+     * 
      * @param pageNumber
      * @param pageSize
      * @return {@link Collection < Atendimento >}
@@ -34,13 +37,17 @@ public interface AtendimentoGateway {
 
     /**
      * Salva um novo atendimento
+     * 
      * @param atendimento
      * @return
      */
     Atendimento save(Atendimento atendimento);
 
     /**
-     * Pesquisa atendimentos registrados para um determinado pedido, por padrão um pedido deve ter um único pedido, mas em algumas situações especiais um pedido pode ser dividido em mais de um atendimento
+     * Pesquisa atendimentos registrados para um determinado pedido, por padrão um
+     * pedido deve ter um único pedido, mas em algumas situações especiais um pedido
+     * pode ser dividido em mais de um atendimento
+     * 
      * @param idPedido
      * @return Optional<Atendimento>
      */
@@ -48,6 +55,7 @@ public interface AtendimentoGateway {
 
     /**
      * Pesquisa dos atendimentos por data e situação
+     * 
      * @param data
      * @param situacoes
      * @return Collection<Atendimento>
@@ -56,7 +64,8 @@ public interface AtendimentoGateway {
 
     /**
      * Criar um novo atendimento com base num pedido
-      * @param idPedido
+     * 
+     * @param idPedido
      * @param codigo
      * @param produtos
      * @return

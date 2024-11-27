@@ -1,4 +1,4 @@
-package br.com.fiap.soat07.techchallenge.cozinha.core.usecase;
+package br.com.fiap.soat07.techchallenge.producao.core.usecase;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -7,23 +7,22 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.entity.Atendimento;
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration.SituacaoDoAtendimento;
-import br.com.fiap.soat07.techchallenge.cozinha.core.gateway.AtendimentoGateway;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.entity.Atendimento;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.SituacaoDoAtendimento;
+import br.com.fiap.soat07.techchallenge.producao.core.gateway.AtendimentoGateway;
 
 @Component
 public class SearchAtendimentoUseCase {
 
 	private final AtendimentoGateway atendimentoGateway;
 
-
 	public SearchAtendimentoUseCase(AtendimentoGateway atendimentoGateway) {
 		this.atendimentoGateway = atendimentoGateway;
 	}
 
-
 	/**
 	 * Get by id
+	 * 
 	 * @param id {@link Long}
 	 * @return {@link Optional<Atendimento>}
 	 */
@@ -36,6 +35,7 @@ public class SearchAtendimentoUseCase {
 
 	/**
 	 * Get by Pedido
+	 * 
 	 * @param id {@link Long}
 	 * @return {@link Collection<Atendimento>}
 	 */
@@ -48,7 +48,8 @@ public class SearchAtendimentoUseCase {
 
 	/**
 	 * Listagem de Atendimentos filtrado por Data e Situação
-	 * @param data {@link LocalDate}
+	 * 
+	 * @param data      {@link LocalDate}
 	 * @param situacoes {@link SituacaoDoAtendimento}
 	 * @return {@link Collection<Atendimento>}
 	 */
@@ -59,12 +60,12 @@ public class SearchAtendimentoUseCase {
 		return atendimentoGateway.findByData(data, situacoes);
 	}
 
-
 	/**
 	 * Listagem de Atendimentos em aberto
+	 * 
 	 * @return {@link Collection<Atendimento>}
 	 */
 	public Collection<Atendimento> find() {
 		return atendimentoGateway.find();
-	}	
+	}
 }

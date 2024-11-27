@@ -1,8 +1,8 @@
-package br.com.fiap.soat07.techchallenge.cozinha.core.domain.entity;
+package br.com.fiap.soat07.techchallenge.producao.core.domain.entity;
 
 import java.util.Objects;
 
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration.TipoProdutoEnum;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.TipoProdutoEnum;
 
 public class Produto {
 
@@ -13,7 +13,7 @@ public class Produto {
 
 	public Produto() {
 	}
-	
+
 	public Produto(String codigo, String nome, TipoProdutoEnum tipo) {
 		this();
 		this.codigo = codigo;
@@ -21,8 +21,6 @@ public class Produto {
 		this.tipoProduto = tipo;
 	}
 
-	
-	
 	public Long getId() {
 		return this.id;
 	}
@@ -40,14 +38,18 @@ public class Produto {
 	}
 
 	public String toString() {
-		return "Produto(id=" + this.getId() + ", codigo=" + this.getCodigo() + ", nome=" + this.getNome() + ", tipo=" + this.getTipoProduto() + ")";
+		return "Produto(id=" + this.getId() + ", codigo=" + this.getCodigo() + ", nome=" + this.getNome() + ", tipo="
+				+ this.getTipoProduto() + ")";
 	}
 
 	@Override
 	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof Produto produto)) return false;
-        return Objects.equals(getCodigo(), produto.getCodigo()) && Objects.equals(getNome(), produto.getNome()) && getTipoProduto() == produto.getTipoProduto();
+		if (this == o)
+			return true;
+		if (!(o instanceof Produto produto))
+			return false;
+		return Objects.equals(getCodigo(), produto.getCodigo()) && Objects.equals(getNome(), produto.getNome())
+				&& getTipoProduto() == produto.getTipoProduto();
 	}
 
 	@Override

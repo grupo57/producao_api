@@ -1,4 +1,4 @@
-package br.com.fiap.soat07.techchallenge.cozinha.infra.repository.mysql;
+package br.com.fiap.soat07.techchallenge.producao.infra.repository.mysql;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -23,8 +23,8 @@ import com.ninja_squad.dbsetup.operation.DeleteAll;
 import com.ninja_squad.dbsetup.operation.Insert;
 import com.ninja_squad.dbsetup.operation.Operation;
 
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.entity.Atendimento;
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration.SituacaoDoAtendimento;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.entity.Atendimento;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.SituacaoDoAtendimento;
 import jakarta.transaction.Transactional;
 
 @ActiveProfiles("test")
@@ -32,42 +32,46 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class AtendimentoRepositoryTest {
 
-	@Autowired
-	private DataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
 
-	@Autowired
+    @Autowired
     private AtendimentoRepository atendimentoRepository;
 
-    
     @BeforeEach
     public void setUp() {
-    	Operation OperationInsert = Insert.into("atendimento")
-    			.columns("id", "id_pedido", "codigo", "data_recebido", "situacao", "data_criacao", "data_ultima_modificacao")
-    			.values(1, 1, "123", LocalDateTime.of(2024,11,1,9,0,0), SituacaoDoAtendimento.RECEBIDO, LocalDateTime.of(2024,11,1,9,0,0), LocalDateTime.of(2024,11,1,9,0,0))
-    			.values(2, 2, "124", LocalDateTime.of(2024,11,1,10,0,0), SituacaoDoAtendimento.RECEBIDO, LocalDateTime.of(2024,11,1,10,0,0), LocalDateTime.of(2024,11,1,10,0,0))
-    			.values(3, 4, "125", LocalDateTime.of(2024,11,1,11,0,0), SituacaoDoAtendimento.RECEBIDO, LocalDateTime.of(2024,11,1,11,0,0), LocalDateTime.of(2024,11,1,11,0,0))
-    			.values(4, 6, "123", LocalDateTime.of(2024,11,2,9,0,0), SituacaoDoAtendimento.RECEBIDO, LocalDateTime.of(2024,11,2,9,0,0), LocalDateTime.of(2024,11,2,9,0,0))
-    			.build();
+        Operation OperationInsert = Insert.into("atendimento")
+                .columns("id", "id_pedido", "codigo", "data_recebido", "situacao", "data_criacao",
+                        "data_ultima_modificacao")
+                .values(1, 1, "123", LocalDateTime.of(2024, 11, 1, 9, 0, 0), SituacaoDoAtendimento.RECEBIDO,
+                        LocalDateTime.of(2024, 11, 1, 9, 0, 0), LocalDateTime.of(2024, 11, 1, 9, 0, 0))
+                .values(2, 2, "124", LocalDateTime.of(2024, 11, 1, 10, 0, 0), SituacaoDoAtendimento.RECEBIDO,
+                        LocalDateTime.of(2024, 11, 1, 10, 0, 0), LocalDateTime.of(2024, 11, 1, 10, 0, 0))
+                .values(3, 4, "125", LocalDateTime.of(2024, 11, 1, 11, 0, 0), SituacaoDoAtendimento.RECEBIDO,
+                        LocalDateTime.of(2024, 11, 1, 11, 0, 0), LocalDateTime.of(2024, 11, 1, 11, 0, 0))
+                .values(4, 6, "123", LocalDateTime.of(2024, 11, 2, 9, 0, 0), SituacaoDoAtendimento.RECEBIDO,
+                        LocalDateTime.of(2024, 11, 2, 9, 0, 0), LocalDateTime.of(2024, 11, 2, 9, 0, 0))
+                .build();
 
-    	DbSetup dbSetup = new DbSetup(
-    			new DataSourceDestination(dataSource), 
-    			Operations.sequenceOf(DeleteAll.from("atendimento"), OperationInsert));
+        DbSetup dbSetup = new DbSetup(
+                new DataSourceDestination(dataSource),
+                Operations.sequenceOf(DeleteAll.from("atendimento"), OperationInsert));
 
-    	dbSetup.launch();
-    }    
+        dbSetup.launch();
+    }
 
     @Test
     void testSaveWithNullValue() {
         assertThatThrownBy(() -> {
             Atendimento savedAtendimento = atendimentoRepository.save(null);
         }).hasRootCauseInstanceOf(IllegalArgumentException.class)
-          .hasMessageContaining("Obrigatório preencher o atendimento");
+                .hasMessageContaining("Obrigatório preencher o atendimento");
     }
-    
+
     @Test
     void testSaveAndFindById() {
         Atendimento atendimento = Atendimento.recebido(null, 9L, "A123", Collections.emptyList());
-    	
+
         // Salvar um atendimento
         Atendimento savedAtendimento = atendimentoRepository.save(atendimento);
 
@@ -102,8 +106,8 @@ public class AtendimentoRepositoryTest {
     @Test
     void testSaveAndDatabaseValidation() {
         // Salvar um atendimento
-    	Atendimento atendimento = Atendimento.recebido(null, 123L, "123X", Collections.emptyList());
-    	Atendimento savedAtendimento = atendimentoRepository.save(atendimento);
+        Atendimento atendimento = Atendimento.recebido(null, 123L, "123X", Collections.emptyList());
+        Atendimento savedAtendimento = atendimentoRepository.save(atendimento);
         assertThat(savedAtendimento.getCodigo()).isEqualTo("123X");
 
         // Validar que o atendimento foi inserido na tabela AtendimentoModel
@@ -115,8 +119,8 @@ public class AtendimentoRepositoryTest {
     @Test
     void testUpdateAndDatabaseValidation() {
         // Salvar um atendimento
-    	Atendimento atendimento = Atendimento.recebido(null, 123L, "123X", Collections.emptyList());
-    	Atendimento savedAtendimento = atendimentoRepository.save(atendimento);
+        Atendimento atendimento = Atendimento.recebido(null, 123L, "123X", Collections.emptyList());
+        Atendimento savedAtendimento = atendimentoRepository.save(atendimento);
         assertThat(savedAtendimento.getCodigo()).isEqualTo("123X");
 
         // Validar que o atendimento foi inserido na tabela AtendimentoModel
@@ -128,13 +132,12 @@ public class AtendimentoRepositoryTest {
     @Test
     void testFindBySituacao() {
         // Salvar um atendimento
-//        Atendimento savedAtendimento = atendimentoRepository.save(atendimento);
+        // Atendimento savedAtendimento = atendimentoRepository.save(atendimento);
 
         // Buscar atendimentos com situação RECEBIDO
         Collection<Atendimento> atendimentos = atendimentoRepository.find(SituacaoDoAtendimento.RECEBIDO, 1, 10);
         assertThat(atendimentos).hasSize(4);
-//        assertThat(atendimentos.iterator().next().getCodigo()).isEqualTo("A123");
+        // assertThat(atendimentos.iterator().next().getCodigo()).isEqualTo("A123");
     }
 
-    
 }

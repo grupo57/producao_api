@@ -1,8 +1,8 @@
-package br.com.fiap.soat07.techchallenge.cozinha.core.usecase;
+package br.com.fiap.soat07.techchallenge.producao.core.usecase;
 
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.entity.Atendimento;
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration.SituacaoDoAtendimento;
-import br.com.fiap.soat07.techchallenge.cozinha.core.gateway.AtendimentoGateway;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.entity.Atendimento;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.SituacaoDoAtendimento;
+import br.com.fiap.soat07.techchallenge.producao.core.gateway.AtendimentoGateway;
 
 public class UpdateAtendimentoSituacaoCanceladoUseCase {
 
@@ -21,7 +21,7 @@ public class UpdateAtendimentoSituacaoCanceladoUseCase {
             atendimento = atendimentoGateway.save(atendimento);
             return atendimento;
         }
-        
+
         if (SituacaoDoAtendimento.INICIADO.equals(atendimento.getSituacao())) {
             atendimento.cancelado();
             atendimento = atendimentoGateway.save(atendimento);
@@ -29,12 +29,12 @@ public class UpdateAtendimentoSituacaoCanceladoUseCase {
         }
 
         if (SituacaoDoAtendimento.ENTREGUE.equals(atendimento.getSituacao())) {
-        	throw new IllegalStateException("atendimento já finalizado");
+            throw new IllegalStateException("atendimento já finalizado");
         }
-        
+
         if (SituacaoDoAtendimento.CANCELADO.equals(atendimento.getSituacao()))
-        	return atendimento;
-        
+            return atendimento;
+
         return atendimento;
     }
 

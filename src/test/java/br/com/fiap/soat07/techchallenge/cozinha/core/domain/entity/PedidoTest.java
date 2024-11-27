@@ -1,15 +1,15 @@
-package br.com.fiap.soat07.techchallenge.cozinha.core.domain.entity;
+package br.com.fiap.soat07.techchallenge.producao.core.domain.entity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration.PedidoStatusEnum;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.PedidoStatusEnum;
 
 class PedidoTest {
 
-	@Test
-	void testConstrutorPadrao() {
+    @Test
+    void testConstrutorPadrao() {
         // Criando um Pedido com o construtor padrão
         Pedido pedidoPadrao = new Pedido();
 
@@ -21,8 +21,8 @@ class PedidoTest {
         assertThat(pedidoPadrao.getStatus()).isEqualTo(PedidoStatusEnum.PREPARO);
     }
 
-	@Test
-	void testConstrutor() {
+    @Test
+    void testConstrutor() {
         Pedido pedido = new Pedido(1L, "1", "Cliente", PedidoStatusEnum.FINALIZADO);
 
         // Verificando valores iniciais
@@ -31,8 +31,8 @@ class PedidoTest {
         assertThat(pedido.getCodigo()).isEqualTo("1");
         assertThat(pedido.getProdutos()).isEmpty();
         assertThat(pedido.getStatus()).isEqualTo(PedidoStatusEnum.FINALIZADO);
-    }	
-	
+    }
+
     @Test
     void testEquals_MesmoObjeto() {
         Pedido pedido1 = new Pedido(1L, "1", "Cliente", PedidoStatusEnum.PREPARO);
@@ -86,5 +86,5 @@ class PedidoTest {
         // Objetos equivalentes devem ter o mesmo hashCode
         assertThat(pedido1.hashCode()).isEqualTo(pedido2.hashCode());
     }
-	
+
 }

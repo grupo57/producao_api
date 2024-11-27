@@ -1,4 +1,4 @@
-package br.com.fiap.soat07.techchallenge.cozinha.core.usecase;
+package br.com.fiap.soat07.techchallenge.producao.core.usecase;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -18,30 +18,29 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.entity.Atendimento;
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration.SituacaoDoAtendimento;
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration.TipoProdutoEnum;
-import br.com.fiap.soat07.techchallenge.cozinha.core.gateway.AtendimentoGateway;
-import br.com.fiap.soat07.techchallenge.cozinha.infra.rest.dto.ProdutoDTO;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.entity.Atendimento;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.SituacaoDoAtendimento;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.TipoProdutoEnum;
+import br.com.fiap.soat07.techchallenge.producao.core.gateway.AtendimentoGateway;
+import br.com.fiap.soat07.techchallenge.producao.infra.rest.dto.ProdutoDTO;
 
 class SearchAtendimentoUseCaseTest {
 
     private SearchAtendimentoUseCase searchAtendimentoUseCase;
 
     @SuppressWarnings("unchecked")
-	private Set<ProdutoDTO> getProdutos() {
-    	return new HashSet<ProdutoDTO>(List.of(
-            new ProdutoDTO(1L, "nome1", "codigo1", TipoProdutoEnum.ACOMPANHAMENTO),
-            new ProdutoDTO(2L, "nome2", "codigo2", TipoProdutoEnum.LANCHE)
-            ));
+    private Set<ProdutoDTO> getProdutos() {
+        return new HashSet<ProdutoDTO>(List.of(
+                new ProdutoDTO(1L, "nome1", "codigo1", TipoProdutoEnum.ACOMPANHAMENTO),
+                new ProdutoDTO(2L, "nome2", "codigo2", TipoProdutoEnum.LANCHE)));
     }
-    
+
     @Mock
     private AtendimentoGateway atendimentoGateway;
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);  // Inicializa os mocks
+        MockitoAnnotations.openMocks(this); // Inicializa os mocks
         searchAtendimentoUseCase = new SearchAtendimentoUseCase(atendimentoGateway);
     }
 
@@ -85,7 +84,7 @@ class SearchAtendimentoUseCaseTest {
         Optional<Atendimento> result = searchAtendimentoUseCase.findByPedido(id);
 
         assertThat(result).isNotEmpty();
-        verify(atendimentoGateway).findByPedido(id);  // Verifica se o método do gateway foi chamado
+        verify(atendimentoGateway).findByPedido(id); // Verifica se o método do gateway foi chamado
     }
 
     @Test
@@ -101,12 +100,12 @@ class SearchAtendimentoUseCaseTest {
         LocalDate data = LocalDate.now();
         EnumSet<SituacaoDoAtendimento> situacoes = EnumSet.noneOf(SituacaoDoAtendimento.class);
         Atendimento atendimento = Atendimento.recebido(1L, 1L, "123", getProdutos());
-        Collection<Atendimento> atendimentos = List.of(atendimento);  
+        Collection<Atendimento> atendimentos = List.of(atendimento);
         when(atendimentoGateway.findByData(data, situacoes)).thenReturn(atendimentos);
 
         Collection<Atendimento> result = searchAtendimentoUseCase.findByData(data, situacoes);
 
         assertThat(result).isNotEmpty();
-        verify(atendimentoGateway).findByData(data, situacoes);  
+        verify(atendimentoGateway).findByData(data, situacoes);
     }
 }

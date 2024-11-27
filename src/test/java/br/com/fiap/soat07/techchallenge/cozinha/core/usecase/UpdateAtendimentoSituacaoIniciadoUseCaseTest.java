@@ -1,4 +1,4 @@
-package br.com.fiap.soat07.techchallenge.cozinha.core.usecase;
+package br.com.fiap.soat07.techchallenge.producao.core.usecase;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.entity.Atendimento;
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration.SituacaoDoAtendimento;
-import br.com.fiap.soat07.techchallenge.cozinha.core.gateway.AtendimentoGateway;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.entity.Atendimento;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.SituacaoDoAtendimento;
+import br.com.fiap.soat07.techchallenge.producao.core.gateway.AtendimentoGateway;
 
 class UpdateAtendimentoSituacaoIniciadoUseCaseTest {
 
@@ -36,58 +36,59 @@ class UpdateAtendimentoSituacaoIniciadoUseCaseTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
-
     @Test
     void testExecute_recebidoParaIniciado() {
-		Atendimento atendimentoRecebido = new Atendimento(1L, 1L, "123", null, null, null, Collections.emptyList());
-		Atendimento atendimentoIniciado = new Atendimento(1L, 1L, "123", null, null, null, Collections.emptyList());
-    	atendimentoIniciado.iniciado();
-		
+        Atendimento atendimentoRecebido = new Atendimento(1L, 1L, "123", null, null, null, Collections.emptyList());
+        Atendimento atendimentoIniciado = new Atendimento(1L, 1L, "123", null, null, null, Collections.emptyList());
+        atendimentoIniciado.iniciado();
+
         // Testa se a situação é atualizada quando o atendimento está em RECEBIDO
         when(atendimentoGateway.save(atendimentoRecebido)).thenReturn(atendimentoIniciado);
 
         Atendimento result = updateAtendimentoSituacaoIniciado.execute(atendimentoRecebido);
 
         assertThat(result).isNotNull();
-        assertThat(result.getSituacao()).isEqualTo(SituacaoDoAtendimento.INICIADO); 
+        assertThat(result.getSituacao()).isEqualTo(SituacaoDoAtendimento.INICIADO);
         verify(atendimentoGateway).save(atendimentoRecebido);
     }
 
     @Test
     void testExecute_iniciadoParaIniciado() {
-		Atendimento atendimentoIniciado = new Atendimento(1L, 1L, "123", null, null, null, Collections.emptyList());
-		atendimentoIniciado.iniciado();
-		
-		// Testa a transição de INICIADO para INICIADO		
+        Atendimento atendimentoIniciado = new Atendimento(1L, 1L, "123", null, null, null, Collections.emptyList());
+        atendimentoIniciado.iniciado();
+
+        // Testa a transição de INICIADO para INICIADO
         when(atendimentoGateway.save(atendimentoIniciado)).thenReturn(atendimentoIniciado);
 
         Atendimento result = updateAtendimentoSituacaoIniciado.execute(atendimentoIniciado);
 
         assertThat(result).isNotNull();
-        assertThat(result.getSituacao()).isEqualTo(SituacaoDoAtendimento.INICIADO);  
-        verifyNoInteractions(atendimentoGateway);  
-    }    
-    
+        assertThat(result.getSituacao()).isEqualTo(SituacaoDoAtendimento.INICIADO);
+        verifyNoInteractions(atendimentoGateway);
+    }
+
     @Test
     void testExecute_finalizadoParaIniciado_naoDeveriaAtualizar() {
-		Atendimento atendimentoFinalizado = new Atendimento(1L, 1L, "123", null, null, null, Collections.emptyList());
-		atendimentoFinalizado.entregue();
-		
-		// Testa se o atendimento não é alterado quando já está na situação FINALIZADO (transição inválida)
+        Atendimento atendimentoFinalizado = new Atendimento(1L, 1L, "123", null, null, null, Collections.emptyList());
+        atendimentoFinalizado.entregue();
+
+        // Testa se o atendimento não é alterado quando já está na situação FINALIZADO
+        // (transição inválida)
         assertThatThrownBy(() -> updateAtendimentoSituacaoIniciado.execute(atendimentoFinalizado))
-        	.isInstanceOf(IllegalStateException.class)
-        	.hasMessage("atendimento já finalizado");
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("atendimento já finalizado");
     }
-    
+
     @Test
     void testExecute_canceladoParaIniciado_naoDeveriaAtualizar() {
-		Atendimento atendimentoCancelado = new Atendimento(1L, 1L, "123", null, null, null, Collections.emptyList());
-		atendimentoCancelado.cancelado();
+        Atendimento atendimentoCancelado = new Atendimento(1L, 1L, "123", null, null, null, Collections.emptyList());
+        atendimentoCancelado.cancelado();
 
-		// Testa se o atendimento não é alterado quando já está na situação CANCELADO (transição inválida)
+        // Testa se o atendimento não é alterado quando já está na situação CANCELADO
+        // (transição inválida)
         assertThatThrownBy(() -> updateAtendimentoSituacaoIniciado.execute(atendimentoCancelado))
-        	.isInstanceOf(IllegalStateException.class)
-        	.hasMessage("atendimento cancelado");
-    }    
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("atendimento cancelado");
+    }
 
 }

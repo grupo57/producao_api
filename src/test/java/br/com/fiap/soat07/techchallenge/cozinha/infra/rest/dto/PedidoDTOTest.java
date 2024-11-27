@@ -1,4 +1,4 @@
-package br.com.fiap.soat07.techchallenge.cozinha.infra.rest.dto;
+package br.com.fiap.soat07.techchallenge.producao.infra.rest.dto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,13 +10,13 @@ import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration.TipoProdutoEnum;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.TipoProdutoEnum;
 
 class PedidoDTOTest {
 
     private PedidoDTO pedidoDTO;
     // Usado para serialização e desserialização JSON
-    private ObjectMapper objectMapper;  
+    private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
@@ -82,7 +82,8 @@ class PedidoDTOTest {
 
     @Test
     void testJsonIgnoreProperties_whenUnknownField_shouldNotThrowException() throws Exception {
-        // Testa se a anotação @JsonIgnoreProperties funciona e ignora campos desconhecidos
+        // Testa se a anotação @JsonIgnoreProperties funciona e ignora campos
+        // desconhecidos
         String jsonWithUnknownField = "{\"id\":1,\"cliente\":\"Cliente A\",\"codigo\":\"A123\",\"produtos\":[{\"id\":1,\"nome\":\"Produto A\",\"codigo\":\"A123\",\"tipo\":\"ACOMPANHAMENTO\"}],\"campoDesconhecido\":\"valor\"}";
 
         PedidoDTO pedido = objectMapper.readValue(jsonWithUnknownField, PedidoDTO.class);
@@ -99,7 +100,8 @@ class PedidoDTOTest {
 
     @Test
     void testProdutosDefaultEmpty() {
-        // Testa se o método getProdutos retorna uma coleção vazia quando produtos é null
+        // Testa se o método getProdutos retorna uma coleção vazia quando produtos é
+        // null
         pedidoDTO.setProdutos(null);
 
         assertThat(pedidoDTO.getProdutos()).isEmpty();

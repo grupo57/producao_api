@@ -1,5 +1,4 @@
-package br.com.fiap.soat07.techchallenge.cozinha.infra.rest.dto;
-
+package br.com.fiap.soat07.techchallenge.producao.infra.rest.dto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -8,12 +7,12 @@ import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.enumeration.TipoProdutoEnum;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.TipoProdutoEnum;
 
 class ProdutoDTOTest {
 
     private ProdutoDTO produtoDTO;
-    private ObjectMapper objectMapper;  
+    private ObjectMapper objectMapper;
 
     @BeforeEach
     void setUp() {
@@ -59,7 +58,8 @@ class ProdutoDTOTest {
 
     @Test
     void testJsonIgnoreProperties_whenUnknownField_shouldNotThrowException() throws Exception {
-        // Testa se a anotação @JsonIgnoreProperties funciona e ignora campos desconhecidos
+        // Testa se a anotação @JsonIgnoreProperties funciona e ignora campos
+        // desconhecidos
         // Não lança exceção, o campo desconhecido é ignorado
         String jsonWithUnknownField = "{\"id\":1,\"nome\":\"Produto A\",\"codigo\":\"A123\",\"tipo\":\"ACOMPANHAMENTO\",\"campoDesconhecido\":\"valor\"}";
 

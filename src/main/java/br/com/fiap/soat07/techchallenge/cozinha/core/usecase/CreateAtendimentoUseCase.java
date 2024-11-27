@@ -1,9 +1,9 @@
-package br.com.fiap.soat07.techchallenge.cozinha.core.usecase;
+package br.com.fiap.soat07.techchallenge.producao.core.usecase;
 
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.entity.Atendimento;
-import br.com.fiap.soat07.techchallenge.cozinha.core.exception.PedidoJaAtendidoException;
-import br.com.fiap.soat07.techchallenge.cozinha.core.gateway.AtendimentoGateway;
-import br.com.fiap.soat07.techchallenge.cozinha.infra.rest.dto.PedidoDTO;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.entity.Atendimento;
+import br.com.fiap.soat07.techchallenge.producao.core.exception.PedidoJaAtendidoException;
+import br.com.fiap.soat07.techchallenge.producao.core.gateway.AtendimentoGateway;
+import br.com.fiap.soat07.techchallenge.producao.infra.rest.dto.PedidoDTO;
 
 public class CreateAtendimentoUseCase {
 
@@ -26,7 +26,8 @@ public class CreateAtendimentoUseCase {
 
         return atendimentoGateway.criar(
                 pedidoDTO.getId(),
-                (pedidoDTO.getCliente() == null || pedidoDTO.getCliente().isEmpty() ? pedidoDTO.getCodigo() : pedidoDTO.getCliente()+ " " + pedidoDTO.getCodigo()),
+                (pedidoDTO.getCliente() == null || pedidoDTO.getCliente().isEmpty() ? pedidoDTO.getCodigo()
+                        : pedidoDTO.getCliente() + " " + pedidoDTO.getCodigo()),
                 pedidoDTO.getProdutos());
     }
 

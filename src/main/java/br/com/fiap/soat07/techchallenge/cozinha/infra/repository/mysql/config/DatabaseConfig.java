@@ -1,4 +1,4 @@
-package br.com.fiap.soat07.techchallenge.cozinha.infra.repository.mysql.config;
+package br.com.fiap.soat07.techchallenge.producao.infra.repository.mysql.config;
 
 import javax.sql.DataSource;
 
@@ -15,9 +15,9 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix =  "spring.datasource")
-@EntityScan("br.com.fiap.soat07.techchallenge.cozinha.infra.repository.mysql.model")
-@EnableJpaRepositories("br.com.fiap.soat07.techchallenge.cozinha")
+@ConfigurationProperties(prefix = "spring.datasource")
+@EntityScan("br.com.fiap.soat07.techchallenge.producao.infra.repository.mysql.model")
+@EnableJpaRepositories("br.com.fiap.soat07.techchallenge.producao")
 @EnableTransactionManagement
 public class DatabaseConfig {
 
@@ -25,7 +25,7 @@ public class DatabaseConfig {
 	private String driverClassName;
 	private String username;
 	private String password;
-	
+
 	@Bean
 	public DataSource dataSource() {
 		HikariConfig hikariConfig = new HikariConfig();
@@ -39,6 +39,7 @@ public class DatabaseConfig {
 	public String getUrl() {
 		return url;
 	}
+
 	public void setUrl(String url) {
 		this.url = url;
 	}
@@ -46,6 +47,7 @@ public class DatabaseConfig {
 	public String getDriverClassName() {
 		return driverClassName;
 	}
+
 	public void setDriverClassName(String driverClassName) {
 		this.driverClassName = driverClassName;
 	}
@@ -53,6 +55,7 @@ public class DatabaseConfig {
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -60,8 +63,9 @@ public class DatabaseConfig {
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 }

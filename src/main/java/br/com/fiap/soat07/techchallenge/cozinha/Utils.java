@@ -1,4 +1,4 @@
-package br.com.fiap.soat07.techchallenge.cozinha;
+package br.com.fiap.soat07.techchallenge.producao;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;

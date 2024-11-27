@@ -1,11 +1,11 @@
 version: "3.7"
 services:
   mysqldb:
-    container_name: cozinha-mysql
+    container_name: tech-challenge-group-57-producao-mysql
     image: "mysql:8.0"
     restart: always
     ports:
-      - 3306:3306
+      - 3307:3306
     networks:
       - java-service-network
     volumes:
@@ -18,7 +18,7 @@ services:
 
   app:
     build: .
-    container_name: tech-challenge-group-57
+    container_name: tech-challenge-group-57-producao-api
     restart: always
     ports:
       - 8080:8080

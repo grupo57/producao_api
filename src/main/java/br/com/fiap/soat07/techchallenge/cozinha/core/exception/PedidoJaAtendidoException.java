@@ -1,4 +1,4 @@
-package br.com.fiap.soat07.techchallenge.cozinha.core.exception;
+package br.com.fiap.soat07.techchallenge.producao.core.exception;
 
 public class PedidoJaAtendidoException extends BusinessException {
     private static final long serialVersionUID = 1369928619481103297L;

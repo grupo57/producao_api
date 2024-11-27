@@ -1,7 +1,7 @@
-package br.com.fiap.soat07.techchallenge.cozinha.infra.repository.rest;
+package br.com.fiap.soat07.techchallenge.producao.infra.repository.rest;
 
-import br.com.fiap.soat07.techchallenge.cozinha.core.domain.entity.Pedido;
-import br.com.fiap.soat07.techchallenge.cozinha.core.gateway.PedidoGateway;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.entity.Pedido;
+import br.com.fiap.soat07.techchallenge.producao.core.gateway.PedidoGateway;
 
 import java.util.Collection;
 import java.util.List;

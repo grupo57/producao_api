@@ -3,7 +3,7 @@ spring:
     allow-bean-definition-overriding: true
     banner-mode: console
   application:
-    name: tech-challenge-cozinha
+    name: tech-challenge-producao
   sql:
     init:
       continue-on-error: true
@@ -32,7 +32,7 @@ spring:
     
 info:
   group-id: "br.com.fiap.soat07"
-  artifact-id: "cozinha"
+  artifact-id: "producao"
   version: "4.0.0"
   java.version: "17.x"
 
@@ -40,7 +40,7 @@ server:
   port: 8080
   max-http-request-header-size: 24KB
   servlet:
-    context-path: /cozinha
+    context-path: /producao
   tomcat:
     max-http-response-header-size: 24KB
 
@@ -51,7 +51,7 @@ logging:
     spring: org.springframework.core.env
     servlet: org.springframework.boot.web, org.apache.coyote, org.apache.catalina, org.apache.tomcat
     data:  org.springframework.jdbc.core,  org.springframework.orm.jpa, org.hibernate
-    app: br.com.fiap.soat07.techchallenge.cozinha
+    app: br.com.fiap.soat07.techchallenge.producao
   level:
     web: ${LOGGING_LEVEL_WEB:INFO}
     spring: ${LOGGING_LEVEL_SPRING:INFO}
