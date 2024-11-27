@@ -1,4 +1,4 @@
-name: SonarQube Cloud
+name: Code Quality and Analysis
 on:
   push:
     branches:
