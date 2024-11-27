@@ -1,0 +1,59 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: console
+  application:
+    name: tech-challenge-cozinha
+  sql:
+    init:
+      continue-on-error: true
+      platform: mysql
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+      mode: always
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        default_schema: public
+
+  datasource:
+    url: ${DATABASE_URL:jdbc:mysql://mysqldb:3306/mydb?allowPublicKeyRetrieval=true}
+    username: ${DATABASE_USER:techchallenge}
+    password: ${DATABASE_PASSWORD:techchallenge}
+    driverClassName: ${DATABASE_DRIVER_CLASS_NAME:com.mysql.cj.jdbc.Driver}
+
+info:
+  group-id: "br.com.fiap.soat07"
+  artifact-id: "cozinha"
+  version: "4.0.0"
+  java.version: "17.x"
+
+server:
+  port: 8080
+  max-http-request-header-size: 24KB
+  servlet:
+    context-path: /cozinha
+  tomcat:
+    max-http-response-header-size: 24KB
+
+
+logging:
+  group:
+    web: org.springframework.web, org.springframework.core.codec, org.springframework.http,
+    spring: org.springframework.core.env
+    servlet: org.springframework.boot.web, org.apache.coyote, org.apache.catalina, org.apache.tomcat
+    data:  org.springframework.jdbc.core,  org.springframework.orm.jpa, org.hibernate
+    app: br.com.fiap.soat07.techchallenge.cozinha
+  level:
+    web: ${LOGGING_LEVEL_WEB:INFO}
+    spring: ${LOGGING_LEVEL_SPRING:INFO}
+    servlet: ${LOGGING_LEVEL_SERVLET:INFO}
+    data: ${LOGGING_LEVEL_DATA:INFO}
+    app: ${LOGGING_LEVEL_APP:INFO}
