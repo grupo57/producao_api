@@ -1,11 +1,9 @@
 name: "Pipeline EKS"
 
 on:
-  workflow_run:
-    workflows: ["Code Quality and Analysis"]
-    branches: [master]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 env:
   ECR_REPOSITORY: techchallenge-producao-api
