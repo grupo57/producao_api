@@ -3,7 +3,7 @@ name: "Deploy"
 on:
   push:
     branches:
-      - main
+      - master
 
 env:
   ECR_REPOSITORY: techchallenge-producao-api
