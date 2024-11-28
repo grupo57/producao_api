@@ -55,7 +55,7 @@ jobs:
       with:
         task-definition: task-definition.json
         # Nome do seu container
-        container-name: container-name
+        container-name: producao-api
         image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
     - name: Deploy Amazon ECS task definition
