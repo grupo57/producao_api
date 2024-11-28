@@ -1,12 +1,10 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-1:026131848615:task-definition/techchallenge:1",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:026131848615:task-definition/producao-api:1",
     "containerDefinitions": [
         {
             "name": "producao-api",
             "image": "026131848615.dkr.ecr.us-east-1.amazonaws.com/techchallenge-producao-api:latest",
-            "cpu": 1024,
-            "memory": 1024,
-            "memoryReservation": 1024,
+            "cpu": 0,
             "portMappings": [
                 {
                     "name": "producao-api-8080-tcp",
@@ -25,7 +23,7 @@
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "/ecs/techchallenge",
+                    "awslogs-group": "/ecs/producao-api",
                     "mode": "non-blocking",
                     "awslogs-create-group": "true",
                     "max-buffer-size": "25m",
@@ -34,70 +32,10 @@
                 },
                 "secretOptions": []
             },
-            "systemControls": [],
-            "resourceRequirements": [
-                {
-                    "value": "1",
-                    "type": "GPU"
-                }
-            ]
-        },
-        {
-            "name": "pedido-api",
-            "image": "026131848615.dkr.ecr.us-east-1.amazonaws.com/techchallenge-pedido-api:latest",
-            "cpu": 1024,
-            "memory": 1024,
-            "memoryReservation": 1024,
-            "portMappings": [
-                {
-                    "name": "pedido-api-8081-tcp",
-                    "containerPort": 8081,
-                    "hostPort": 8081,
-                    "protocol": "tcp"
-                }
-            ],
-            "essential": false,
-            "environment": [],
-            "environmentFiles": [],
-            "mountPoints": [],
-            "volumesFrom": [],
-            "systemControls": [],
-            "resourceRequirements": [
-                {
-                    "value": "1",
-                    "type": "GPU"
-                }
-            ]
-        },
-        {
-            "name": "pagamento-api",
-            "image": "026131848615.dkr.ecr.us-east-1.amazonaws.com/techchallenge-pagamento-api:latest",
-            "cpu": 1024,
-            "memory": 1024,
-            "memoryReservation": 1024,
-            "portMappings": [
-                {
-                    "name": "pagamento-api-8083-tcp",
-                    "containerPort": 8083,
-                    "hostPort": 8083,
-                    "protocol": "tcp"
-                }
-            ],
-            "essential": false,
-            "environment": [],
-            "environmentFiles": [],
-            "mountPoints": [],
-            "volumesFrom": [],
-            "systemControls": [],
-            "resourceRequirements": [
-                {
-                    "value": "1",
-                    "type": "GPU"
-                }
-            ]
+            "systemControls": []
         }
     ],
-    "family": "techchallenge",
+    "family": "producao-api",
     "executionRoleArn": "arn:aws:iam::026131848615:role/ecsTaskExecutionRole",
     "networkMode": "bridge",
     "revision": 1,
@@ -120,9 +58,6 @@
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
         },
         {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
-        },
-        {
             "name": "ecs.capability.execution-role-ecr-pull"
         },
         {
@@ -139,11 +74,13 @@
     "requiresCompatibilities": [
         "EC2"
     ],
+    "cpu": "1024",
+    "memory": "3072",
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2024-11-28T18:20:34.513Z",
+    "registeredAt": "2024-11-28T19:21:25.500Z",
     "registeredBy": "arn:aws:iam::026131848615:root",
     "tags": []
 }
