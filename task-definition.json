@@ -1,5 +1,5 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-east-1:026131848615:task-definition/producao-api:1",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:026131848615:task-definition/producao-api:2",
     "containerDefinitions": [
         {
             "name": "producao-api",
@@ -38,7 +38,7 @@
     "family": "producao-api",
     "executionRoleArn": "arn:aws:iam::026131848615:role/ecsTaskExecutionRole",
     "networkMode": "bridge",
-    "revision": 1,
+    "revision": 2,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -80,7 +80,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2024-11-28T19:21:25.500Z",
+    "registeredAt": "2024-11-28T20:36:00.269Z",
     "registeredBy": "arn:aws:iam::026131848615:root",
     "tags": []
 }
