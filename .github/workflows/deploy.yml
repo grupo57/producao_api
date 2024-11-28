@@ -63,7 +63,7 @@ jobs:
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
         # Nome dado para o seu service no cluster Elastic Container Service
-        service: producao-api-service
+        service: techchallenge
         # Nome do cluster Elastic Container Service
         cluster: techchallenge-02
         wait-for-service-stability: true
