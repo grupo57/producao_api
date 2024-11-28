@@ -65,6 +65,6 @@ jobs:
         # Nome dado para o seu service no cluster Elastic Container Service
         service: producao-api
         # Nome do cluster Elastic Container Service
-        cluster: techchallenge-02
+        cluster: techchallenge-03
         wait-for-service-stability: true
     
