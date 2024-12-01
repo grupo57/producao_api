@@ -2,10 +2,7 @@ package br.com.fiap.soat07.techchallenge.producao.core.usecase;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anySet;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -14,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.fiap.soat07.techchallenge.producao.core.gateway.PedidoGateway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -31,6 +29,9 @@ class CreateAtendimentoUseCaseTest {
 
     @Mock
     private AtendimentoGateway atendimentoGateway;
+
+    @Mock
+    private PedidoGateway pedidoGateway;
 
     @InjectMocks
     private CreateAtendimentoUseCase createAtendimentoUseCase;
