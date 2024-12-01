@@ -10,7 +10,7 @@ import br.com.fiap.soat07.techchallenge.producao.core.usecase.UpdateAtendimentoS
 import br.com.fiap.soat07.techchallenge.producao.core.usecase.UpdateAtendimentoSituacaoIniciadoUseCase;
 
 @Component
-public class producaoService {
+public class ProducaoService {
 
     private final CreateAtendimentoUseCase createAtendimentoUseCase;
     private final SearchAtendimentoUseCase searchAtendimentoUseCase;
@@ -18,7 +18,7 @@ public class producaoService {
     private final UpdateAtendimentoSituacaoConcluidoUseCase updateAtendimentoSituacaoConcluidoUseCase;
     private final UpdateAtendimentoSituacaoCanceladoUseCase updateAtendimentoSituacaoCanceladoUseCase;
 
-    public producaoService(final AtendimentoGateway atendimentoGateway) {
+    public ProducaoService(final AtendimentoGateway atendimentoGateway) {
         this.createAtendimentoUseCase = new CreateAtendimentoUseCase(atendimentoGateway);
         this.updateAtendimentoSituacaoIniciadoUseCase = new UpdateAtendimentoSituacaoIniciadoUseCase(
                 atendimentoGateway);

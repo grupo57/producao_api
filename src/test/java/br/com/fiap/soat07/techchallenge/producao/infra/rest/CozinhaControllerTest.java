@@ -24,7 +24,7 @@ import br.com.fiap.soat07.techchallenge.producao.core.usecase.SearchAtendimentoU
 import br.com.fiap.soat07.techchallenge.producao.core.usecase.UpdateAtendimentoSituacaoConcluidoUseCase;
 import br.com.fiap.soat07.techchallenge.producao.core.usecase.UpdateAtendimentoSituacaoIniciadoUseCase;
 import br.com.fiap.soat07.techchallenge.producao.infra.rest.dto.PedidoDTO;
-import br.com.fiap.soat07.techchallenge.producao.infra.service.producaoService;
+import br.com.fiap.soat07.techchallenge.producao.infra.service.ProducaoService;
 
 //@SpringBootTest
 @RestClientTest(ProducaoController.class)
@@ -34,7 +34,7 @@ class producaoControllerTest {
 	private ProducaoController controller;
 
 	@MockBean
-	private producaoService producaoService;
+	private ProducaoService producaoService;
 
 	@MockBean
 	private CreateAtendimentoUseCase createAtendimentoUseCase;

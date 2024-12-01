@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fiap.soat07.techchallenge.producao.core.domain.entity.Atendimento;
 import br.com.fiap.soat07.techchallenge.producao.core.exception.PedidoJaAtendidoException;
 import br.com.fiap.soat07.techchallenge.producao.infra.rest.dto.PedidoDTO;
-import br.com.fiap.soat07.techchallenge.producao.infra.service.producaoService;
+import br.com.fiap.soat07.techchallenge.producao.infra.service.ProducaoService;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -30,9 +30,9 @@ import jakarta.transaction.Transactional;
 @RequestMapping
 public class ProducaoController {
 
-    private final producaoService producaoService;
+    private final ProducaoService producaoService;
 
-    public ProducaoController(producaoService producaoService) {
+    public ProducaoController(ProducaoService producaoService) {
         this.producaoService = producaoService;
     }
 
