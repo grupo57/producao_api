@@ -1,10 +1,10 @@
 name: Code Quality and Analysis
 on:
-  # pull_request:
-  #   types: [opened, synchronize, reopened]
-  push:
-    branches:
-      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+  # push:
+  #   branches:
+  #     - main
 jobs:
   build:
     name: Build and analyze
