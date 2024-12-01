@@ -14,7 +14,7 @@ env:
 
 jobs:
   terraform:
-    name: "Terraform"
+    name: "Deploy"
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
