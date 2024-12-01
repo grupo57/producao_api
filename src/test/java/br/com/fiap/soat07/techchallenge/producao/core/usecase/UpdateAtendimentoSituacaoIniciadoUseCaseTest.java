@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Collections;
 
+import br.com.fiap.soat07.techchallenge.producao.core.gateway.PedidoGateway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -24,10 +25,13 @@ class UpdateAtendimentoSituacaoIniciadoUseCaseTest {
     @Mock
     private AtendimentoGateway atendimentoGateway;
 
+    @Mock
+    private PedidoGateway pedidoGateway;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        updateAtendimentoSituacaoIniciado = new UpdateAtendimentoSituacaoIniciadoUseCase(atendimentoGateway);
+        updateAtendimentoSituacaoIniciado = new UpdateAtendimentoSituacaoIniciadoUseCase(atendimentoGateway, pedidoGateway);
     }
 
     @Test

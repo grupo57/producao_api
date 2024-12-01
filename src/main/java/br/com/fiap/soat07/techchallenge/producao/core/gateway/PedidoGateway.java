@@ -1,27 +1,19 @@
 package br.com.fiap.soat07.techchallenge.producao.core.gateway;
 
+import br.com.fiap.soat07.techchallenge.producao.core.domain.entity.Atendimento;
 import br.com.fiap.soat07.techchallenge.producao.core.domain.entity.Pedido;
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.SituacaoDoAtendimento;
 
 import java.util.Collection;
 import java.util.Optional;
 
 public interface PedidoGateway {
 
-    /**
-     * Get by id
-     * 
-     * @param id {@link Long}
-     * @return {@link Pedido}
+     /**
+     * Atualiza a situação do pedido de acordo com a situação do atendimento
+     * @param atendimento
+     * @param situacaoDoAtendimento
      */
-    Optional<Pedido> findById(long id);
-
-    /**
-     * Get pageable
-     * 
-     * @param pageNumber
-     * @param pageSize
-     * @return {@link Collection < Pedido >}
-     */
-    Collection<Pedido> find(int pageNumber, int pageSize);
+     void update(Atendimento atendimento, SituacaoDoAtendimento situacaoDoAtendimento);
 
 }

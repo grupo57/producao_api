@@ -1,5 +1,6 @@
 package br.com.fiap.soat07.techchallenge.producao.infra.service;
 
+import br.com.fiap.soat07.techchallenge.producao.core.gateway.PedidoGateway;
 import org.springframework.stereotype.Component;
 
 import br.com.fiap.soat07.techchallenge.producao.core.gateway.AtendimentoGateway;
@@ -18,14 +19,15 @@ public class ProducaoService {
     private final UpdateAtendimentoSituacaoConcluidoUseCase updateAtendimentoSituacaoConcluidoUseCase;
     private final UpdateAtendimentoSituacaoCanceladoUseCase updateAtendimentoSituacaoCanceladoUseCase;
 
-    public ProducaoService(final AtendimentoGateway atendimentoGateway) {
-        this.createAtendimentoUseCase = new CreateAtendimentoUseCase(atendimentoGateway);
+    public ProducaoService(final AtendimentoGateway atendimentoGateway, final PedidoGateway pedidoGateway) {
+        this.createAtendimentoUseCase = new CreateAtendimentoUseCase(
+                atendimentoGateway, pedidoGateway);
         this.updateAtendimentoSituacaoIniciadoUseCase = new UpdateAtendimentoSituacaoIniciadoUseCase(
-                atendimentoGateway);
+                atendimentoGateway, pedidoGateway);
         this.updateAtendimentoSituacaoConcluidoUseCase = new UpdateAtendimentoSituacaoConcluidoUseCase(
-                atendimentoGateway);
+                atendimentoGateway, pedidoGateway);
         this.updateAtendimentoSituacaoCanceladoUseCase = new UpdateAtendimentoSituacaoCanceladoUseCase(
-                atendimentoGateway);
+                atendimentoGateway, pedidoGateway);
         this.searchAtendimentoUseCase = new SearchAtendimentoUseCase(atendimentoGateway);
     }
 
