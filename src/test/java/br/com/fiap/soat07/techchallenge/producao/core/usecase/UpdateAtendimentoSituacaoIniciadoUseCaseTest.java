@@ -54,6 +54,7 @@ class UpdateAtendimentoSituacaoIniciadoUseCaseTest {
         assertThat(result).isNotNull();
         assertThat(result.getSituacao()).isEqualTo(SituacaoDoAtendimento.INICIADO);
         verify(atendimentoGateway).save(atendimentoRecebido);
+        verify(pedidoGateway).update(atendimentoRecebido, SituacaoDoAtendimento.INICIADO);
     }
 
     @Test
@@ -69,6 +70,7 @@ class UpdateAtendimentoSituacaoIniciadoUseCaseTest {
         assertThat(result).isNotNull();
         assertThat(result.getSituacao()).isEqualTo(SituacaoDoAtendimento.INICIADO);
         verifyNoInteractions(atendimentoGateway);
+        verifyNoInteractions(pedidoGateway);
     }
 
     @Test

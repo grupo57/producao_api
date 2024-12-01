@@ -15,11 +15,12 @@ public class ServiceConfigProperties {
 
 
     public String getPedidoURL(Atendimento atendimento) {
+        if (atendimento == null)
+            throw new IllegalStateException("Obrigatório informar o atendimento");
+
         if (pedidoURL == null)
             throw new IllegalStateException("URL do serviço de pedido não foi configurada, parâmetro inválido");
         return pedidoURL+atendimento.getIdPedido()+"?status="+ PedidoStatusEnum.get(atendimento.getSituacao());
     }
-    public void setPedidoURL(String pedidoURL) {
-        this.pedidoURL = pedidoURL;
-    }
+
 }

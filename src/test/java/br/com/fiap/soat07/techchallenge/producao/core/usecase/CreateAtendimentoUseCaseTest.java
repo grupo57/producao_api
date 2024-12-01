@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
+import br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration.SituacaoDoAtendimento;
 import br.com.fiap.soat07.techchallenge.producao.core.gateway.PedidoGateway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -106,6 +107,7 @@ class CreateAtendimentoUseCaseTest {
                 eq(1L),
                 eq("Cliente X 123"),
                 eq(pedidoDTO.getProdutos()));
+        verify(pedidoGateway).update(atendimento, SituacaoDoAtendimento.INICIADO);
     }
 
     @Test
@@ -129,5 +131,6 @@ class CreateAtendimentoUseCaseTest {
                 eq("123"),
                 eq(pedidoDTO.getProdutos()));
         assertThat(atendimento).isNotNull();
+        verify(pedidoGateway).update(atendimento, SituacaoDoAtendimento.INICIADO);
     }
 }

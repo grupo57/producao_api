@@ -53,6 +53,7 @@ class UpdateAtendimentoSituacaoConcluidoUseCaseTest {
         assertThat(result).isNotNull();
         assertThat(result.getSituacao()).isEqualTo(SituacaoDoAtendimento.ENTREGUE);
         verify(atendimentoGateway).save(atendimentoRecebido);
+        verify(pedidoGateway).update(atendimentoRecebido, SituacaoDoAtendimento.ENTREGUE);
     }
 
     @Test
@@ -67,7 +68,8 @@ class UpdateAtendimentoSituacaoConcluidoUseCaseTest {
 
         assertThat(result).isNotNull();
         assertThat(result.getSituacao()).isEqualTo(SituacaoDoAtendimento.ENTREGUE);
-        // verifyNoInteractions(atendimentoGateway);
+        verify(atendimentoGateway).save(atendimentoIniciado);
+        verify(pedidoGateway).update(atendimentoIniciado, SituacaoDoAtendimento.ENTREGUE);
     }
 
     @Test
@@ -80,6 +82,7 @@ class UpdateAtendimentoSituacaoConcluidoUseCaseTest {
         assertThat(result).isNotNull();
         assertThat(result.getSituacao()).isEqualTo(SituacaoDoAtendimento.ENTREGUE);
         verifyNoInteractions(atendimentoGateway);
+        verifyNoInteractions(pedidoGateway);
     }
 
     @Test
