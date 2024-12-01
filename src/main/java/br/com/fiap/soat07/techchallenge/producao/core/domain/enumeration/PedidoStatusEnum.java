@@ -2,27 +2,19 @@ package br.com.fiap.soat07.techchallenge.producao.core.domain.enumeration;
 
 public enum PedidoStatusEnum {
 
-	PREPARO(2),
-	PRONTO(3),
-	FINALIZADO(4),
-	CANCELADO(5);
+	PREPARO,
+	PRONTO,
+	FINALIZADO,
+	CANCELADO;
 
-	private int step;
-
-	private PedidoStatusEnum(int step) {
-		this.step = step;
-	}
-
-	public int getStep() {
-		return step;
-	}
-
-	public boolean isCancelado() {
-		return this == PedidoStatusEnum.CANCELADO;
-	}
-
-	public boolean isFinalizado() {
-		return this == PedidoStatusEnum.FINALIZADO;
+	public static PedidoStatusEnum get(SituacaoDoAtendimento situacao) {
+		return switch (situacao) {
+			case RECEBIDO -> PREPARO;
+			case INICIADO -> PREPARO;
+			case PREPARADO -> PRONTO;
+			case ENTREGUE -> FINALIZADO;
+			case CANCELADO -> CANCELADO;
+		};
 	}
 
 }
