@@ -27,11 +27,11 @@ import br.com.fiap.soat07.techchallenge.producao.infra.rest.dto.PedidoDTO;
 import br.com.fiap.soat07.techchallenge.producao.infra.service.producaoService;
 
 //@SpringBootTest
-@RestClientTest(producaoController.class)
+@RestClientTest(ProducaoController.class)
 class producaoControllerTest {
 
 	@Autowired
-	private producaoController controller;
+	private ProducaoController controller;
 
 	@MockBean
 	private producaoService producaoService;

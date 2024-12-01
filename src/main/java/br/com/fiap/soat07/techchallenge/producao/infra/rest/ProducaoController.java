@@ -28,11 +28,11 @@ import jakarta.transaction.Transactional;
 @Tag(name = "producao", description = "producao")
 @RestController
 @RequestMapping
-public class producaoController {
+public class ProducaoController {
 
     private final producaoService producaoService;
 
-    public producaoController(producaoService producaoService) {
+    public ProducaoController(producaoService producaoService) {
         this.producaoService = producaoService;
     }
 
