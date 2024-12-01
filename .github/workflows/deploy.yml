@@ -5,66 +5,44 @@ on:
     branches:
       - master
 
-env:
-  ECR_REPOSITORY: techchallenge-producao-api
-  EKS_CLUSTER_NAME: techchallenge 
-  AWS_REGION: ${{ secrets.AWS_REGION }}
-  AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
-  IMAGE_TAG: latest
-
 jobs:
-  build:
-    name: Deployment
+  terraform:
+    name: "Deploy"
     runs-on: ubuntu-latest
-
     permissions:
       pull-requests: write
-      id-token: write # This is required for requesting the JWT
-      contents: read  # This is required for actions/checkout
-
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-    - name: Set short git commit SHA
-      id: commit
-      uses: prompt/actions-commit-hash@v2
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          # terraform_version: 1.4.2
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-    - name: Check out code
-      uses: actions/checkout@v2
-    
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v3
-      with:
-        role-to-assume: "${{ secrets.AWS_ROLE_ARN }}"
-        aws-region: ${{ secrets.AWS_REGION }}
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
 
-    - name: Login to Amazon ECR
-      id: login-ecr
-      uses: aws-actions/amazon-ecr-login@v1
+      - name: Terraform Init
+        id: init
+        run: terraform init
+      
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
 
-    - name: Build, tag, and push image to Amazon ECR
-      env:
-        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-      run: |
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
+      - name: Terraform Plan
+        id: plan
+        # if: github.event_name == 'pull_request'
+        run: terraform plan -no-color -input=false
+        continue-on-error: true
 
-    - name: Fill in the new image ID in the Amazon ECS task definition
-      id: task-def
-      uses: aws-actions/amazon-ecs-render-task-definition@v1
-      with:
-        task-definition: task-definition.json
-        # Nome do seu container
-        container-name: producao-api
-        image: $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
 
-    - name: Deploy Amazon ECS task definition
-      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-      with:
-        task-definition: task-definition.json
-        # Nome dado para o seu service no cluster Elastic Container Service
-        service: producao-api
-        # Nome do cluster Elastic Container Service
-        cluster: techchallenge-03
-        wait-for-service-stability: true
-    
+      - name: Terraform Apply
+        # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=false
