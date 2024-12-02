@@ -1,12 +1,18 @@
 package br.com.fiap.soat07.techchallenge.producao.infra.rest;
 
-//import static org.hamcrest.Matchers.*;
-//import static org.hamcrest.BaseMatcher.*;
-//import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.Matchers.*;
+import static org.mockito.Mockito.*;
+
+import br.com.fiap.soat07.techchallenge.producao.core.gateway.PedidoGateway;
+import br.com.fiap.soat07.techchallenge.producao.infra.repository.rest.PedidoRestImpl;
+import br.com.fiap.soat07.techchallenge.producao.infra.repository.rest.ServiceConfigProperties;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -19,8 +25,20 @@ import io.restassured.http.ContentType;
 @Sql(scripts = "/data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
 public class producaoControllerTest_IT extends BaseIT {
 
+    @MockBean
+    private ServiceConfigProperties serviceConfigProperties;
+
+    @MockBean
+    private PedidoGateway pedidoGateway;
+
+
     @BeforeEach
-    public void beforeEach() {
+    void setUp() {
+        MockitoAnnotations.openMocks(this);
+
+        when(serviceConfigProperties.getBaseURL()).thenReturn("http://teste.com");
+        when(serviceConfigProperties.getPedidoURL(any())).thenReturn("http://teste.com/pedido/1");
+        doNothing().when(pedidoGateway).update(any(), any());
     }
 
     @Test
@@ -79,19 +97,14 @@ public class producaoControllerTest_IT extends BaseIT {
                 .when()
                 .post("/producao/atendimentos")
                 .then()
-                .statusCode(HttpStatus.CREATED.value())
-        // .body("size()", Matchers.equalTo(8))
-        // .body("id", notNullValue())
-        // .body("idPedido", is(1245))
-        // .body("codigo", is("IT001"))
-        // .body("situacao", is("RECEBIDO"))
-        // .body("inicio", notNullValue())
-        // .body("concluido", notNullValue())
-        ;
+                .statusCode(HttpStatus.CREATED.value());
     }
 
     @Test
     void getAtendimentoParaIniciado() {
+        when(serviceConfigProperties.getBaseURL()).thenReturn("http://teste.com");
+        when(serviceConfigProperties.getPedidoURL(any())).thenReturn("http://teste.com/pedido/1");
+        doNothing().when(pedidoGateway).update(any(), any());
 
         RestAssured
                 .given()

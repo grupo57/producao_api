@@ -23,6 +23,9 @@ spring:
       hibernate:
         default_schema: public
 
+  microsservico:
+    pedidoURL: "http://localhost:8080/pedido/"
+
   datasource:
     url: jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;MODE=MYSQL;INIT=CREATE SCHEMA IF NOT EXISTS public
     username: sa

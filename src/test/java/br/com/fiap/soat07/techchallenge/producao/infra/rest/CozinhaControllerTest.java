@@ -26,7 +26,6 @@ import br.com.fiap.soat07.techchallenge.producao.core.usecase.UpdateAtendimentoS
 import br.com.fiap.soat07.techchallenge.producao.infra.rest.dto.PedidoDTO;
 import br.com.fiap.soat07.techchallenge.producao.infra.service.ProducaoService;
 
-//@SpringBootTest
 @RestClientTest(ProducaoController.class)
 class producaoControllerTest {
 
